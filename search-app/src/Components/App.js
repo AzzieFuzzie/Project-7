@@ -9,31 +9,52 @@ import Photo from './Photos';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 class App extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       pics: [],
     };
   }
 
-  componentDidMount() {
+  // componentDidMount() {
+  //   const query = 'cats';
+  //   fetch(
+  //     ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&format=json&nojsoncallback=1`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       this.setState({ pics: data.photos.photo });
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error fecthing data, error');
+  //     });
+  // }
+
+  componentDidMount() {}
+  performSearch = (query) => {
     fetch(
-      ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&format=json&nojsoncallback=1&auth_token=72157719336622741-e7843089f5091912&api_sig=244a9b2faf6e3df4697402af886e8dc7`
+      ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&format=json&nojsoncallback=1`
     )
-      .then((responseData) => {
-        this.setState({ pics: responseData.photos.photo });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({ pics: data.photos.photo });
       })
       .catch((error) => {
-        console.log('Error fecthing data, error');
+        console.log('Error fecthing data', error);
       });
-  }
+  };
+
   render() {
     console.log(this.state.pics);
     return (
       <BrowserRouter>
         <div className='container'>
-          <Route path='/' component={Search} />
-          <Route path='./nav' />
+          <Search onSearch={this.performSearch} />
+          {/* <Photo data={this.state.pics} /> */}
+          <Route path='/' component={Nav} />
+          <Route path='/cats' component={Photo} />
         </div>
       </BrowserRouter>
     );

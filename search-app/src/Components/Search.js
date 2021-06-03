@@ -1,9 +1,23 @@
 import React from 'react';
 
 class Search extends React.Component {
+  state = {
+    searchInput: '',
+  };
+
+  onSearchChange = (e) => {
+    this.setState({ searchInput: e.target.value });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onSearch(this.state.searchInput);
+    e.currentTarget.reset();
+  };
+
   render() {
     return (
-      <form className='search-form'>
+      <form className='search-form' onSubmit={this.handleSubmit}>
         <input type='search' name='search' placeholder='Search' required />
         <button type='submit' className='search-button'>
           <svg
