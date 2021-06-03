@@ -31,7 +31,9 @@ class App extends Component {
   //     });
   // }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.performSearch();
+  }
   performSearch = (query) => {
     fetch(
       ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&format=json&nojsoncallback=1`
