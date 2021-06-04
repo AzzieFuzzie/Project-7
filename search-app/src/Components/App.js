@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import apiKey from '../config';
-// import Photo from './Components/Photo';
 import Nav from './Nav';
 import Search from './Search';
-import Notfound from './Notfound';
-import Photo from './Photos';
+// import Notfound from './Notfound';
+import PhotoContainer from './PhotoContainer';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
@@ -16,27 +15,13 @@ class App extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   const query = 'cats';
-  //   fetch(
-  //     ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&format=json&nojsoncallback=1`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       this.setState({ pics: data.photos.photo });
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error fecthing data, error');
-  //     });
-  // }
-
+  // Allows users to search for images and then uses fetch to retrieve data
   componentDidMount() {
     this.performSearch();
   }
-  performSearch = (query) => {
+  performSearch = (query = 'cats') => {
     fetch(
-      ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&format=json&nojsoncallback=1`
+      ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -48,15 +33,27 @@ class App extends Component {
       });
   };
 
+  // Renders All main components
   render() {
     console.log(this.state.pics);
     return (
       <BrowserRouter>
         <div className='container'>
           <Search onSearch={this.performSearch} />
-          {/* <Photo data={this.state.pics} /> */}
           <Route path='/' component={Nav} />
-          <Route path='/cats' component={Photo} />
+          <Route
+            path='/waterfall'
+            render={() => <PhotoContainer data={this.state.pics} />}
+          />
+          <Route
+            exact
+            path='/dogs'
+            render={() => <PhotoContainer data={this.state.pics} />}
+          />
+          <Route
+            path='/horses'
+            render={() => <PhotoContainer data={this.state.pics} />}
+          />
         </div>
       </BrowserRouter>
     );

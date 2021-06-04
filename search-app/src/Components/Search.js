@@ -17,7 +17,11 @@ class Search extends React.Component {
 
   render() {
     return (
-      <form className='search-form' onSubmit={this.handleSubmit}>
+      <form
+        className='search-form'
+        onSubmit={this.handleSubmit}
+        onChange={this.onSearchChange}
+      >
         <input type='search' name='search' placeholder='Search' required />
         <button type='submit' className='search-button'>
           <svg

@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = () => {
+const Nav = (props) => {
   return (
     <nav className='main-nav'>
       <ul>
         <li>
-          <Link>Waterfall</Link>
+          <Link to='/water'>Water</Link>
         </li>
         <li>
-          <Link>Sunset</Link>
+          <Link to='/dogs'>Dogs</Link>
         </li>
         <li>
-          <Link>Horses</Link>
+          <Link to='/horses'>Horses</Link>
         </li>
       </ul>
     </nav>
