@@ -42,7 +42,12 @@ class App extends Component {
           <Search onSearch={this.performSearch} />
           <Route path='/' component={Nav} />
           <Route
-            path='/waterfall'
+            exact
+            path='/'
+            render={() => <PhotoContainer data={this.state.pics} />}
+          />
+          <Route
+            path='/water'
             render={() => <PhotoContainer data={this.state.pics} />}
           />
           <Route
@@ -51,6 +56,7 @@ class App extends Component {
             render={() => <PhotoContainer data={this.state.pics} />}
           />
           <Route
+            exact
             path='/horses'
             render={() => <PhotoContainer data={this.state.pics} />}
           />
