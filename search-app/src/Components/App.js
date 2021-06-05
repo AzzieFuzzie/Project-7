@@ -12,16 +12,20 @@ class App extends Component {
     super();
     this.state = {
       pics: [],
-      dogs: [],
-      horses: [],
-      waterfalls: [],
     };
   }
 
   // Allows users to search for images and then uses fetch to retrieve data
-  componentDidMount() {
+  componentDidMount(query) {
     this.performSearch();
     console.log(this.props);
+    if (this.props.location.pathname === '/horses') {
+      this.performSearch((query = 'horses'));
+    } else if (this.props.location.pathname === '/dogs') {
+      this.performSearch((query = 'dogs'));
+    } else if (this.props.location.pathname === '/water') {
+      this.performSearch((query = 'water'));
+    }
   }
   performSearch = (query = 'cats') => {
     fetch(
