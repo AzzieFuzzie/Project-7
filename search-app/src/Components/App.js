@@ -5,19 +5,23 @@ import Search from './Search';
 // import Notfound from './Notfound';
 import PhotoContainer from './PhotoContainer';
 
-import { BrowserRouter, Route } from 'react-router-dom';
+import { withRouter, Route } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
     super();
     this.state = {
       pics: [],
+      dogs: [],
+      horses: [],
+      waterfalls: [],
     };
   }
 
   // Allows users to search for images and then uses fetch to retrieve data
   componentDidMount() {
     this.performSearch();
+    console.log(this.props);
   }
   performSearch = (query = 'cats') => {
     fetch(
@@ -37,33 +41,31 @@ class App extends Component {
   render() {
     console.log(this.state.pics);
     return (
-      <BrowserRouter>
-        <div className='container'>
-          <Search onSearch={this.performSearch} />
-          <Route path='/' component={Nav} />
-          <Route
-            exact
-            path='/'
-            render={() => <PhotoContainer data={this.state.pics} />}
-          />
-          <Route
-            path='/water'
-            render={() => <PhotoContainer data={this.state.pics} />}
-          />
-          <Route
-            exact
-            path='/dogs'
-            render={() => <PhotoContainer data={this.state.pics} />}
-          />
-          <Route
-            exact
-            path='/horses'
-            render={() => <PhotoContainer data={this.state.pics} />}
-          />
-        </div>
-      </BrowserRouter>
+      <div className='container'>
+        <Search onSearch={this.performSearch} />
+        <Route path='/' component={Nav} />
+        <Route
+          exact
+          path='/'
+          render={() => <PhotoContainer data={this.state.pics} />}
+        />
+        <Route
+          path='/water'
+          render={() => <PhotoContainer data={this.state.pics} />}
+        />
+        <Route
+          exact
+          path='/dogs'
+          render={() => <PhotoContainer data={this.state.pics} />}
+        />
+        <Route
+          exact
+          path='/horses'
+          render={() => <PhotoContainer data={this.state.pics} />}
+        />
+      </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
