@@ -14,6 +14,7 @@ class App extends Component {
       pics: [],
       dogs: [],
       horses: [],
+      water: [],
     };
   }
 
@@ -26,7 +27,7 @@ class App extends Component {
   }
   // Allows for users search to searh
 
-  performSearch = (query = 'cats') => {
+  performSearch = (query = 'water') => {
     fetch(
       ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
     )
@@ -91,8 +92,10 @@ class App extends Component {
     return (
       <div className='container'>
         <Search onSearch={this.performSearch} />
+
+        <Route path='/' component={Nav} />
+
         <Switch>
-          <Route path='/' component={Nav} />
           <Route
             exact
             path='/'
