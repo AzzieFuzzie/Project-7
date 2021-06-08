@@ -91,11 +91,16 @@ class App extends Component {
     console.log(this.state.pics);
     return (
       <div className='container'>
-        <Search onSearch={this.performSearch} />
-
         <Route path='/' component={Nav} />
 
         <Switch>
+          <Route
+            path='/search/:query'
+            onSearch={this.performSearch}
+            render={() => {
+              <Search />;
+            }}
+          />
           <Route
             exact
             path='/'

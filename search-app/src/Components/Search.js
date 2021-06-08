@@ -13,6 +13,9 @@ class Search extends React.Component {
     e.preventDefault();
     this.props.onSearch(this.state.searchInput);
     e.currentTarget.reset();
+    let topic = this.query.value;
+    let path = `search/${topic}`;
+    this.props.history.push(path);
   };
 
   render() {
@@ -22,7 +25,15 @@ class Search extends React.Component {
         onSubmit={this.handleSubmit}
         onChange={this.onSearchChange}
       >
-        <input type='search' name='search' placeholder='Search' required />
+        <input
+          type='search'
+          name='search'
+          placeholder='Search'
+          required
+          ref={(input) => {
+            this.query = input;
+          }}
+        />
         <button type='submit' className='search-button'>
           <svg
             fill='#fff'
