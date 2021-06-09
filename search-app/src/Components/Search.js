@@ -14,6 +14,7 @@ class Search extends React.Component {
     this.props.onSearch(this.state.searchInput);
     e.currentTarget.reset();
     let topic = this.query.value;
+    console.log(this.query.value);
     let path = `search/${topic}`;
     this.props.history.push(path);
   };

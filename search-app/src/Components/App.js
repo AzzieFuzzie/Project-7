@@ -5,7 +5,7 @@ import Search from './Search';
 import Notfound from './Notfound';
 import PhotoContainer from './PhotoContainer';
 
-import { withRouter, Route, Switch } from 'react-router-dom';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   // Allows users to search for images and then uses fetch to retrieve data
-  componentDidMount(query) {
+  componentDidMount() {
     this.performSearch();
     this.dogsResults();
     this.horsesResults();
@@ -27,7 +27,7 @@ class App extends Component {
   }
   // Allows for users search to searh
 
-  performSearch = (query = 'water') => {
+  performSearch = (query) => {
     fetch(
       ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
     )
@@ -91,21 +91,17 @@ class App extends Component {
     console.log(this.state.pics);
     return (
       <div className='container'>
+        <Search onSearch={this.performSearch} />
         <Route path='/' component={Nav} />
 
         <Switch>
           <Route
             path='/search/:query'
-            onSearch={this.performSearch}
             render={() => {
-              <Search />;
+              <PhotoContainer data={this.state.pics} />;
             }}
           />
-          <Route
-            exact
-            path='/'
-            render={() => <PhotoContainer data={this.state.pics} />}
-          />
+          <Route exact path='/' render={() => <Redirect to='/water' />} />
           <Route
             exact
             path='/water'
