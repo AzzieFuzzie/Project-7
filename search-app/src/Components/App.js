@@ -56,7 +56,7 @@ class App extends Component {
       });
   };
 
-  // Shows results for horses when horses nav clicked
+  // Shows resddults for horses when horses nav clicked
   horsesResults = (query = 'horses') => {
     fetch(
       ` https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
@@ -98,7 +98,10 @@ class App extends Component {
           <Route
             path='/search/:query'
             render={() => {
-              <PhotoContainer data={this.state.pics} />;
+              <PhotoContainer
+                data={this.state.pics}
+                onSearch={this.performSearch}
+              />;
             }}
           />
           <Route exact path='/' render={() => <Redirect to='/water' />} />
