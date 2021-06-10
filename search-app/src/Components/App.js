@@ -93,9 +93,7 @@ class App extends Component {
         <Switch>
           <Route
             path='/search/:query'
-            render={() => {
-              <PhotoContainer data={this.state.pics} />;
-            }}
+            render={() => <PhotoContainer data={this.state.pics} />}
           />
           <Route exact path='/' render={() => <Redirect to='/water' />} />
           <Route
