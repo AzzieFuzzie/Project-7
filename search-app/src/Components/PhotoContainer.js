@@ -2,9 +2,12 @@ import React from 'react';
 import Photo from './Photo';
 import Notfound from './Notfound';
 
+// Displays photos from depending on which state is passed through props
 const PhotoContainer = (props) => {
   const results = props.data;
   let pictures;
+
+  // Checks to see if no data is returned from search results
   if (results.length > 0) {
     pictures = results.map((pic) => (
       <Photo

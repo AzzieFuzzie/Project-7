@@ -33,7 +33,6 @@ class App extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({ pics: data.photos.photo });
       })
       .catch((error) => {
@@ -48,7 +47,6 @@ class App extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({ dogs: data.photos.photo });
       })
       .catch((error) => {
@@ -63,7 +61,6 @@ class App extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({ horses: data.photos.photo });
       })
       .catch((error) => {
@@ -78,7 +75,6 @@ class App extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({ water: data.photos.photo });
       })
       .catch((error) => {
@@ -98,10 +94,7 @@ class App extends Component {
           <Route
             path='/search/:query'
             render={() => {
-              <PhotoContainer
-                data={this.state.pics}
-                onSearch={this.performSearch}
-              />;
+              <PhotoContainer data={this.state.pics} />;
             }}
           />
           <Route exact path='/' render={() => <Redirect to='/water' />} />
